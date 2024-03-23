@@ -13,6 +13,18 @@ pygame.display.set_icon(logo)
 largura = 500
 altura = 500
 
+'''
+Para a definição de font segue a ordem dos parametros
+1-Nome da fonte
+2-tamanho da fonte
+3-negrito ou não
+4-italico ou não
+'''
+fonte = pygame.font.SysFont('Arial', 30, True, True )
+
+
+# Sistema de pontos
+pontos = 0
 relogio =pygame.time.Clock()
 
 # Coordenadas de Movimento
@@ -28,6 +40,13 @@ tela = pygame.display.set_mode((largura, altura))
 # Loop pincipal do jogo e sempre é infinito para que atualize sempre quando algo acontecer
 while True:
     
+    '''Agora vamos definir o que vai está escrito no texto
+    Pra isso criamos uma nova variavel e colocamos uma string fomatada com o nome do nosso texto
+    e fazemos uma interpolação com a variavel pontos
+    '''
+    mensagem = f'Pontos: {pontos}'
+    # Juntando nosso texto e fonte e adicionando com e outras configs
+    texto_formatado = fonte.render(mensagem, True, (255,255,255))
     relogio.tick(30)
     # Preenche a tela de Branco
     tela.fill((255,255,255))
@@ -82,5 +101,6 @@ while True:
     if retangulo_vermelho.colliderect(retangulo_azul):
         x_doVerde = randint(40, 450)
         y_doVerde = randint(40, 450)
-    
+        pontos += 1
+    tela.blit(texto_formatado, (320, 50))
     pygame.display.update()
