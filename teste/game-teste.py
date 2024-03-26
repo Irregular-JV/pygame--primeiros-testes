@@ -41,7 +41,7 @@ while True:
     texto = f'Pontos: {pontos}'
     junta = font.render(texto, True, (255,255,255))
     relogio.tick(60)
-    # tela.blit(img, (0,0))
+    tela.blit(img, (0,0))
     for eventos in pygame.event.get():
         if eventos.type == QUIT:
             pygame.quit()
