@@ -34,14 +34,14 @@ fundo = pygame.mixer.music.load('music/fundo.mp3')
 pygame.mixer.music.play(-1)
 pygame.mixer.music.set_volume(0.2)
 colid = pygame.mixer.Sound('music/colid.mp3')
-colid.pygame.mixer.set_volume(0)
 
 # Estrutur do game
 while True:
+    tela.fill((0,0,0))
     texto = f'Pontos: {pontos}'
     junta = font.render(texto, True, (255,255,255))
     relogio.tick(60)
-    tela.blit(img, (0,0))
+    # tela.blit(img, (0,0))
     for eventos in pygame.event.get():
         if eventos.type == QUIT:
             pygame.quit()
@@ -74,6 +74,7 @@ while True:
        y_a = randint(30, 550)
        pontos += 1
        colid.play() 
+      
     tela.blit(junta, (450, 30))
 
     pygame.display.update()
