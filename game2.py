@@ -9,6 +9,13 @@ pygame.display.set_caption("Meu Jogo")
 logo = pygame.image.load("dyswai5p.png")
 pygame.display.set_icon(logo)
 
+# Músicas
+somdefundo = pygame.mixer.music.load('fundo.mp3')
+pygame.mixer.music.play(-1)
+pygame.mixer.music.set_volume(0.5)
+
+som_colid = pygame.mixer.Sound("colid.mp3")
+
 
 largura = 500
 altura = 500
@@ -28,7 +35,7 @@ pontos = 0
 relogio =pygame.time.Clock()
 
 # Coordenadas de Movimento
-x = largura // 2 - 20
+x = int(largura // 2 - 20)
 y = 0
 
 x_doVerde = randint(40, 450)
@@ -47,7 +54,7 @@ while True:
     mensagem = f'Pontos: {pontos}'
     # Juntando nosso texto e fonte e adicionando com e outras configs
     texto_formatado = fonte.render(mensagem, True, (255,255,255))
-    relogio.tick(30)
+    relogio.tick(15)
     # Preenche a tela de Branco
     tela.fill((255,255,255))
 
@@ -57,19 +64,16 @@ while True:
             pygame.quit()
             exit()
 
-        # if eventos.type == KEYDOWN:
-        #     if eventos.key == K_a:
-        #         x += -20
-        #     if eventos.key == K_s:
-        #         y += 20
-        #     if eventos.key == K_d:
-        #         x += 20
-        #     if eventos.key == K_w:
-        #         y += -20
+        '''if eventos.type == KEYDOWN:
+             if eventos.key == K_a:
+                 x += -20
+             if eventos.key == K_s:
+                 y += 20
+             if eventos.key == K_d:
+                 x += 20
+             if eventos.key == K_w:
+                 y += -20'''
                 
-   
-
-    
 
 
     # Desenhos na Tela
@@ -98,9 +102,13 @@ while True:
         if y < -30:
             y = altura - 30
     
+    # Colidindo com outro retangulo
     if retangulo_vermelho.colliderect(retangulo_azul):
         x_doVerde = randint(40, 450)
         y_doVerde = randint(40, 450)
         pontos += 1
+        som_colid.play()
+
+
     tela.blit(texto_formatado, (320, 50))
     pygame.display.update()
